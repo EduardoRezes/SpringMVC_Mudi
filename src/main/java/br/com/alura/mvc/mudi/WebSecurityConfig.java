@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				//Neste codigo abaixo podemos notar que o formLogin passando uma lambda com loginPage(que recebe a pagina a ser redirecionado) e a permissão.
 				.formLogin(form -> form
 					.loginPage("/login")
-					.defaultSuccessUrl("/home", true)
+					.defaultSuccessUrl("/usuario/pedido", true)
 					.permitAll()
 				)
 				.logout(logout -> logout.logoutUrl("/logout"))
