@@ -20,7 +20,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 				.anyRequest().authenticated()
 			.and()
-				.httpBasic();
+				//Neste codigo abaixo podemos notar que o formLogin passando uma lambda com loginPage(que recebe a pagina a ser redirecionado) e a permissão.
+				.formLogin(form -> form
+					.loginPage("/login")
+					.permitAll()
+				);
 	}
 
 	@Bean
