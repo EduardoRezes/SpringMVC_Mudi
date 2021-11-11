@@ -2,7 +2,7 @@
 
 
 # Resumo do projeto
-O projeto apresentado no curso teve como finalidade mostrar a integração de um sistema de gerenciamento de funcionarios com um banco de dados, tendo como principal objetivo criação de um CRUD e manipulação de dados.
+O projeto apresentado no curso teve como finalidade mostrar a integração de um sistema de gerenciamento de pedidos, o usuario cadastra um pedido que queria comprar por um determinado preço, tendo uma lista de varios usuarios com produtos.
 
 ## 🔨 Tópicos do Curso
 
