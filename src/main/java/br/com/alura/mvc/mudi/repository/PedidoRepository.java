@@ -2,6 +2,8 @@ package br.com.alura.mvc.mudi.repository;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,8 +15,13 @@ import br.com.alura.mvc.mudi.model.StatusPedido;
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	
-	List<Pedido> findByStatus(StatusPedido status);
+	//Necessário fazer a anotação @EnableCaching na classe principal(MudiApplication) para que o cache funcione.
+	@Cacheable("Itens")
+	List<Pedido> findByStatus(StatusPedido status, Pageable sort);
 
 	@Query("SELECT p FROM Pedido p join p.user u WHERE u.username = :username ")
 	List<Pedido> findAllByUsuario(@Param("username")String username);
+
+	@Query("SELECT p FROM Pedido p join p.user u WHERE u.username = :username AND p.status = :status")
+	List<Pedido> findByStatusEUsuario(@Param("status")StatusPedido status, @Param("username") String username);
 }

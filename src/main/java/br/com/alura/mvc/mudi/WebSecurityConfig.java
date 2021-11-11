@@ -24,16 +24,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
+				.antMatchers("/home/**").permitAll()
 				.anyRequest().authenticated()
 			.and()
 				//Neste codigo abaixo podemos notar que o formLogin passando uma lambda com loginPage(que recebe a pagina a ser redirecionado) e a permissão.
 				.formLogin(form -> form
 					.loginPage("/login")
-					.defaultSuccessUrl("/home", true)
+					.defaultSuccessUrl("/usuario/pedido", true)
 					.permitAll()
 				)
-				.logout(logout -> logout.logoutUrl("/logout"))
-				.csrf().disable();
+				.logout(logout -> {
+					logout.logoutUrl("/logout")
+						.logoutSuccessUrl("/home");
+				});
 	}
 	
 	@Override
