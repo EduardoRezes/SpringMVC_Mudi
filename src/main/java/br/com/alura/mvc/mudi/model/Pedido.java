@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -38,16 +39,12 @@ public class Pedido {
 	@Enumerated(EnumType.STRING)
 	private StatusPedido status;
 	
-	public List<Oferta> getOfertas() {
-		return ofertas;
-	}
-	public void setOfertas(List<Oferta> ofertas) {
-		this.ofertas = ofertas;
-	}
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pedido", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Oferta> ofertas;
 	
 	public User getUser() {
@@ -98,6 +95,10 @@ public class Pedido {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	
+	public List<Oferta> getOfertas() {
+		return ofertas;
+	}
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
+	}
 }
